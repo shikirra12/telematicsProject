@@ -5,6 +5,7 @@ public class VehicleInfo {
     public double oilChange;
     public double engineSize;
 
+
     public VehicleInfo() {
         this.VIN = VIN;
         this.odometer = odometer;

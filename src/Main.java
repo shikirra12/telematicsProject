@@ -9,23 +9,23 @@ public class Main {
 //        creates the userinputs and converts them to their variable types
         System.out.println("Enter the VIN number(Must be whole number)");
         String vinInput = scanner.nextLine();
-//        int VIN = Integer.parseInt(vinInput);
+        vehicleInfo.setVIN(Integer.parseInt(vinInput));
 
         System.out.println("Enter the Odometer number");
         String odometerInput = scanner.nextLine();
-//        double odometer = Double.parseDouble(odometerInput);
+        vehicleInfo.setOdometer(Double.parseDouble(odometerInput));
 
         System.out.println("Enter Gallons of Gas Consumed");
         String consumptionInput = scanner.nextLine();
-//        double consumption = Double.parseDouble(consumptionInput);
+        vehicleInfo.setConsumption(Double.parseDouble(consumptionInput));
 
         System.out.println("Enter Odometer Reading for last Oil Change");
         String oilChangeInput = scanner.nextLine();
-//        double oilChange = Double.parseDouble(oilChangeInput);
+        vehicleInfo.setOilChange(Double.parseDouble(oilChangeInput));
 
         System.out.println("Enter Engine size in Liters");
         String engineSizeInput = scanner.nextLine();
-//        double engineSize = Double.parseDouble(engineSizeInput);
+        vehicleInfo.setEngineSize(Double.parseDouble(engineSizeInput));
 
     telematicsService.report(vehicleInfo);
     }
