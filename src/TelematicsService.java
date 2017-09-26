@@ -47,27 +47,25 @@ public class TelematicsService {
                     amountOfCars++;
                     VehicleInfo vi = mapper.readValue(f, VehicleInfo.class);
 
-                    vehicleStats.setOdometer((vehicleStats.getOdometer() + vehicleInfo.getOdometer()) / amountOfCars);
-                    vehicleStats.setConsumption((vehicleStats.getConsumption() + vehicleInfo.getConsumption() / amountOfCars));
-                    vehicleStats.setOilChange((vehicleStats.getOilChange() + vehicleInfo.getOilChange() / amountOfCars));
-                    vehicleStats.setEngineSize((vehicleStats.getEngineSize() + vehicleInfo.getEngineSize() / amountOfCars));
+                    vehicleStats.setOdometer((vehicleStats.getOdometer() + vi.getOdometer()));
+                    vehicleStats.setConsumption((vehicleStats.getConsumption() + vi.getConsumption()));
+                    vehicleStats.setOilChange((vehicleStats.getOilChange() + vi.getOilChange()));
+                    vehicleStats.setEngineSize((vehicleStats.getEngineSize() + vi.getEngineSize()));
 
-                    htmlFile += "<h1 align=\"center\">History</h1>\n" +
-                            "    <table align=\"center\" border=\"1\">\n" +
-                            "        <tr>\n" +
-                            "            <th>VIN</th><th>Odometer (miles)</th><th>Consumption (gallons)</th><th>Last Oil Change</th><th>Engine Size (liters)</th>\n" +
-                            "        </tr>\n" +
-                            "        <tr>\n" +
-                            "            <td align=\"center\">" + vehicleInfo.getVIN() + "</td><td align=\"center\">"+ vehicleInfo.getOdometer() +"</td><td align=\"center\">"+ vehicleInfo.getConsumption() +"</td><td align=\"center\">"+ vehicleInfo.getOilChange() +"</td align=\"center\"><td align=\"center\">"+ vehicleInfo.getEngineSize() +"</td>\n" +
-                            "        </tr>\n" +
-                            "        <tr>\n" +
-                            "            <td align=\"center\">45435</td><td align=\"center\">123</td><td align=\"center\">234</td><td align=\"center\">345</td align=\"center\"><td align=\"center\">4.5</td>\n" +
+                    htmlFile += "        <tr>\n" +
+                            "            <td align=\"center\">" + vi.getVIN() + "</td><td align=\"center\">"+ vi.getOdometer() +"</td><td align=\"center\">"+ vi.getConsumption() +"</td><td align=\"center\">"+ vi.getOilChange() +"</td align=\"center\"><td align=\"center\">"+ vi.getEngineSize() +"</td>\n" +
                             "        </tr>\n";
 
                     // Now you have a File object named "f".
                     // You can use this to create a new instance of Scanner
                 }
             }
+
+            vehicleStats.setOdometer((vehicleStats.getOdometer() / amountOfCars));
+            vehicleStats.setConsumption((vehicleStats.getConsumption() / amountOfCars));
+            vehicleStats.setOilChange((vehicleStats.getOilChange() / amountOfCars));
+            vehicleStats.setEngineSize((vehicleStats.getEngineSize() / amountOfCars));
+
 
             File dashboard = new File("dashboard.html");
             FileWriter dashboardInfo = new FileWriter(dashboard);
@@ -88,18 +86,14 @@ public class TelematicsService {
                     "        <tr>\n" +
                     "            <th>VIN</th><th>Odometer (miles)</th><th>Consumption (gallons)</th><th>Last Oil Change</th><th>Engine Size (liters)</th>\n" +
                     "        </tr>\n" +
-                    "        <tr>\n" +
-                    "            <td align=\"center\">"+ vehicleInfo.getVIN() +"</td><td align=\"center\">"+ vehicleInfo.getOdometer() +"</td><td align=\"center\">"+ vehicleInfo.getConsumption() +"</td><td align=\"center\">"+ vehicleInfo.getOilChange() +"</td align=\"center\"><td align=\"center\">"+ vehicleInfo.getEngineSize() +"</td>\n" +
-                    "        </tr>\n" +
-                    "        <tr>\n" +
-                    "            <td align=\"center\">45435</td><td align=\"center\">123</td><td align=\"center\">234</td><td align=\"center\">345</td align=\"center\"><td align=\"center\">4.5</td>\n" +
-                    "        </tr>\n" +
+                    htmlFile +
                     "    </table>\n" +
                     "  </body>\n" +
                     "</html>\n";
 
             dashboardInfo.write(content);
             dashboardInfo.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
